@@ -80,4 +80,20 @@ class PostController extends Controller
                 ->with(['error' => 'Some problem has occurred, please try again']);
         }
     }
+
+    public function destroy($id)
+    {
+        $post = Post::findOrFail($id);
+        $post->delete();
+
+        if ($post) {
+            return redirect()
+                ->route('post.index')
+                ->with(['success' => 'Post has been deleted successfully']);
+        } else {
+            return redirect()
+                ->route('post.index')
+                ->with(['error' => 'Some problem has occurred, please try again']);
+        }
+    }
 }
